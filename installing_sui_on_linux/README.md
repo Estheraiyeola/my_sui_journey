@@ -1,6 +1,3 @@
-Below is a rephrased version of your README that you can share on your GitHub page:
-
----
 
 # Sui Move Setup on Ubuntu
 
@@ -104,6 +101,3 @@ For the best development experience, install these VSCode extensions:
 For a visual guide to the entire setup process, check out the video walkthrough linked below:
 [Video Guide](#)
 
----
-
-This version has been tailored for clarity and ease of use on GitHub. Enjoy building with Sui Move!
