@@ -5,7 +5,7 @@ This repository provides a detailed walkthrough for installing Sui Move on Ubunt
 
 ## Prerequisites
 
-Before you begin, make sure your system is up-to-date and that you have all the necessary dependencies.
+Before you begin, make sure your system is up-to-date and that you have all the necessary dependencies installed.
 
 ### 1. Update Your System
 ```bash
@@ -20,24 +20,24 @@ sudo apt-get install curl git-all cmake gcc libssl-dev pkg-config libclang-dev l
 ## Installing Rust
 
 ### 3. Ensure `curl` is Installed
-Verify the installation of `curl`:
+Verify that `curl` is installed:
 ```bash
 curl --version
 ```
-If it's missing, install it with:
+If it’s missing, install it with:
 ```bash
 sudo apt install curl
 ```
 
 ### 4. Install or Update Rust
-For a fresh install, run:
-```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
-If Rust is already installed, update it to the latest stable version:
-```bash
-rustup update stable
-```
+- **Fresh Install:**
+  ```bash
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  ```
+- **Update Existing Installation:**
+  ```bash
+  rustup update stable
+  ```
 
 ## Installing the Sui CLI
 
@@ -47,19 +47,54 @@ Run the following command to install the Sui CLI:
 cargo install --locked --git https://github.com/MystenLabs/sui.git --branch testnet sui --features tracing
 ```
 
-### 6. Confirm the Installation
-Verify the Sui CLI installation by checking its version:
+### 6. Verify the Installation
+Check the installed version:
 ```bash
 sui --version
 ```
 
+#### Troubleshooting: Sui Command Not Found
+If you see an error like:
+```
+Command 'sui' not found, did you mean: ...
+```
+it might be because the Sui CLI was installed in a hidden folder (for example, `~/.cargo/bin` or another hidden directory). To resolve this:
+
+1. **Locate the Binary:**  
+   Check if the Sui binary exists in your Cargo bin directory or another hidden folder:
+   ```bash
+   ls ~/.cargo/bin/sui
+   ls ~/.sui/bin/sui
+   ```
+
+2. **Update Your PATH:**  
+   If you find the binary, add its directory to your PATH. For example, if it's in `~/.cargo/bin`, add the following line to your shell configuration file (e.g., `~/.bashrc` or `~/.zshrc`):
+   ```bash
+   export PATH="$HOME/.cargo/bin:$PATH"
+   ```
+   Then reload your configuration:
+   ```bash
+   source ~/.bashrc
+   ```
+
+3. **Verify Again:**  
+   Now, run:
+   ```bash
+   sui --version
+   ```
+   The command should be recognized.
+
 ## Setting Up the `sui-move-analyzer` Language Server
 
-### 7. Download the Binary
-Download the latest precompiled binary for Ubuntu from the [releases page](https://github.com/movebit/sui-move-analyzer/releases/download/v1.1.8/sui-move-analyzer-ubuntu22.04-x86_64-v1.1.8).
+### 7. Download the Precompiled Binary
+Download the latest `sui-move-analyzer` binary for Ubuntu from the [releases page](https://github.com/movebit/sui-move-analyzer/releases/download/v1.1.8/sui-move-analyzer-ubuntu22.04-x86_64-v1.1.8).
 
 ### 8. Rename and Move the Binary
-Rename the file to `sui-move-analyzer` and move it to a directory in your PATH (e.g., `/usr/local/bin`):
+Rename the downloaded file:
+```bash
+mv <downloaded-filename> sui-move-analyzer
+```
+Move the binary to a directory in your PATH (e.g., `/usr/local/bin`):
 ```bash
 sudo mv sui-move-analyzer /usr/local/bin
 ```
@@ -71,7 +106,6 @@ sudo chmod +x /usr/local/bin/sui-move-analyzer
 ```
 
 ### 10. Verify the Language Server Installation
-Check that the language server is installed correctly:
 ```bash
 sui-move-analyzer --version
 ```
@@ -79,7 +113,7 @@ sui-move-analyzer --version
 ## Installing VSCode
 
 ### 11. Download VSCode
-Download the latest `.deb` package for VSCode from the [official website](https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64).
+Download the latest `.deb` package for VSCode from the [official site](https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64).
 
 ### 12. Install VSCode
 Navigate to your Downloads folder and install the package:
@@ -98,6 +132,8 @@ For the best development experience, install these VSCode extensions:
 
 ## Video Walkthrough
 
-For a visual guide to the entire setup process, check out the video walkthrough linked below:
+For a visual guide through the setup process, check out the video walkthrough below:
 [Video Guide](#)
 
+
+This guide should help ensure your environment is properly configured, including handling cases where the Sui CLI might reside in a hidden folder. Happy coding!
